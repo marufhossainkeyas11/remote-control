@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Remote for Car</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+</head>
+
+<body>
+  <div class="overlay" ontouchstart="closeMemu()  " data-overlay></div>
+  <h1>
+    <div class="toggle-icon" id="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-120v-80h720v80H120Zm0-320v-80h720v80H120Zm0-320v-80h720v80H120Z"/></svg>
+    </div>
+    <div style="position: absolute; left:4rem">Remote Control</div>
+  </h1>
+  <div class="manu">
+    <div>
+      <input type="checkbox" id="toggle">
+      <label for="toggle" class="menus-label label">Theme</label>
+      <div class="menus">
+        <ul>
+          <li>Theme 1 <input type="radio" value="theme1" name="theme" /></li>
+          <li>Theme 2 <input type="radio" value="theme2" name="theme" /></li>
+          <li>Theme 3 <input type="radio" value="theme3" name="theme" /></li>
+          <li>Theme 4 <input type="radio" value="theme4" name="theme" /></li>
+          <li>Theme 5 <input type="radio" value="theme5" name="theme" /></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <label class="fullscreen-label label" onclick="Fullscreen()">
+        Fullscreen
+        <span class="fullScreenBox"><svg class="drag" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#erefe3">
+            <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
+          </svg></span>
+      </label>
+    </div>
+    <div>
+      <label class="light-label label">
+        Light
+        <span class="switch">
+          <input class="toggleB" type="checkbox" onclick="light()">
+          <span class="slider"></span>
+        </span>
+      </label>
+    </div>
+    <div>
+      <label class="disconnect-label label">
+        Disconnect
+        <span class="switch">
+          <input class="toggleD" type="checkbox" onclick="disconnect()">
+          <span class="slider"></span>
+        </span>
+      </label>
+    </div>
+  </div>
+  <div class="box lefBox">
+    <div class="speed" onclick="sl()">
+      <svg xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 1.5px 1px #00000080);" viewBox="0 -960 960 960" >
+        <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+      </svg>
+    </div>
+    <div class="gear-control">
+      <span class="slider-label">80%</span> 
+      <button class="gear-btn up" onclick="changeSpeed(5)">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" >
+          <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z" />
+        </svg></button>
+      <div class="slider-wrapper">
+        <input type="range" id="speedSlider" min="0" max="100" value="80" step="1">
+      </div>
+      <button class="gear-btn down" onclick="changeSpeed(-5)"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+          <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+        </svg></button>
+    </div>
+    <div class="dragBox" style="position: absolute; top : .5rem; right: .5rem; padding: 3px;" onclick="drag()">
+      <svg xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(-1px 1.5px 1px #00000080);" height="24px" viewBox="0 -960 960 960" width="24px">
+        <path d="M160-360v-80h640v80H160Zm0-160v-80h640v80H160Z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#erefe3"><path d="M480-80 310-250l57-57 73 73v-206H235l73 72-58 58L80-480l169-169 57 57-72 72h206v-206l-73 73-57-57 170-170 170 170-57 57-73-73v206h205l-73-72 58-58 170 170-170 170-57-57 73-73H520v205l72-73 58 58L480-80Z"/></svg>
+      </div>
+    <h3 style=" text-shadow: -1px 1px 3px #00000080; padding: 5px; margin-left: 50%; transform: translateX(-50%); width: 50%; text-align: center;">Control</h3>
+    <!----  Button  ---->
+    <button class="button left" type="submit">LEFT</button>
+    <button class="button right" type="submit">RIGHT</button>
+    <button class="button forward" type="submit">FORWARD</button>
+    <button class="button backward" type="submit">BACKWARD</button>
+  </div>
+  <script src="script.js" type="text/javascript" charset="utf-8"></script>
+  
+</html>
