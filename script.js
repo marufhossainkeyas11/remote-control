@@ -375,7 +375,7 @@ radios.forEach(radio => {
 
 window.onload = () => {
   checkboxD.checked = getS("togglD") === "off";
-  checkboxB.checked = getS("togglB") === "off";
+  checkboxB.checked = getS("togglB") === "on";
   if (getS("togglD") === "on") {
     addButton();
   } else {
