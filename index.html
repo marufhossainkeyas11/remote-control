@@ -1120,12 +1120,6 @@
       {
         box.style.cssText = `left:${getS('left')}; right:${getS('right')}; top:${getS('top')};`
       }
-      if (getS('rValue'))
-      {
-        let a = sessionStorage.getItem('rValue');
-        label.textContent = a + '%';
-        slider.value = a;
-      }
       button.forEach((item) => {
         item.addEventListener('touchend', (e) => {
           if (!outT) return;
@@ -1140,6 +1134,8 @@
           pressureEnd(e);
         });
       });
+      updateLabel(null, 0);
+      pressureEnd(null);
       updateMeta();
       addDrag();
       dragEffectRemove();
