@@ -745,6 +745,8 @@
     let offsetX, offsetY, isDragging = false,
       isClickedDrag = false,
       outT = false,
+      didEnd = false,
+      activeButton = null,
       last = null,
       longPressTimer, topL, originalClass, nowS;
     const BASE_URL = (prompt = prompt('localIP?')) ? prompt : "http://192.168.4.1";
@@ -848,6 +850,7 @@
           el.addEventListener(buttonE[i], buttonE[i + 1]);
         }
       });
+      
     }
     
     function removeButton() {
@@ -976,7 +979,9 @@
     }
     
     function pressureStart(e) {
-      const found = e.currentTarget.innerHTML.toLowerCase();
+      if (activeButton && activeButton !== e.currentTarget) return; // ব্লক অন্য বাটন
+      activeButton = e.currentTarget;
+      const found = activeButton.innerHTML.toLowerCase();
       if (!found) return;
       if (!BASE_URL) location.reload();
       const url = BASE_URL + "/command";
@@ -985,16 +990,28 @@
         response => console.log("Success:", response),
         error => null
       );
-      e.currentTarget.style = 'transform: scale(0.97); text-shadow:none; box-shadow: none;';
+      activeButton.style = 'transform: scale(0.97); text-shadow:none; box-shadow: none;';
       vibrator(50);
+      didEnd = false;
+      outT = false;
+    }
+    
+    function pressureMove(e) {
+      if (activeButton !== e.currentTarget || didEnd) return;
+      const touch = e.touches[0];
+      const rect = e.currentTarget.getBoundingClientRect();
+      const insideX = touch.clientX >= rect.left && touch.clientX <= rect.right;
+      const insideY = touch.clientY >= rect.top && touch.clientY <= rect.bottom;
+      if (!insideX || !insideY && !didEnd) {
+        pressureEnd(e);
+        outT = true;
+      }
     }
     
     function pressureEnd(e) {
-      if (outT) {
-        addButton();
-        outT = false;
-        return;
-      };
+      if (didEnd || activeButton !== e.currentTarget || outT) return;
+      didEnd = true;
+      outT = false;
       const found = e.currentTarget.innerHTML.toLowerCase();
       if (!found) return;
       const url = BASE_URL + "/command";
@@ -1005,21 +1022,7 @@
       );
       e.currentTarget.removeAttribute('style');
       vibrator(50);
-    }
-    
-    function pressureMove(e) {
-      const touch = e.touches[0];
-      const rect = e.currentTarget.getBoundingClientRect();
-      const insideX = touch.clientX >= rect.left && touch.clientX <= rect.right;
-      const insideY = touch.clientY >= rect.top && touch.clientY <= rect.bottom;
-      
-      if (!insideX || !insideY) {
-        pressureEnd(e);
-        removeButton();
-        outT = true;
-      } else {
-        outT = false;
-      }
+      activeButton = null;
     }
     
     function changeSpeed(amount) {
@@ -1099,41 +1102,19 @@
         addButton();
       } else {
         removeButton();
-      }
-      if (!getB('site'))
-      {
+      }if (!getB('site')){
         setS('site', false);
-      }
-      if (getS('class'))
-      {
+      }if (getS('class')){
         box.classList.remove('lefBox');
         box.classList.add(getS('class'));
-      }
-      if (getS('theme'))
-      {
+      }if (getS('theme')){
         html.dataset.theme = getS('theme');
         last = document.querySelector(`[name="theme"][value="${getS('theme')}"]`);
         if (last) last.checked = true;
         updateMeta();
-      }
-      if (getS('top') || getS('right') || getS('left'))
-      {
+      }if (getS('top') || getS('right') || getS('left')){
         box.style.cssText = `left:${getS('left')}; right:${getS('right')}; top:${getS('top')};`
       }
-      button.forEach((item) => {
-        item.addEventListener('touchend', (e) => {
-          if (!outT) return;
-          console.log('end');
-          button.forEach((item) => {
-            item.addEventListener('touchend', (e) => {
-              if (!outT) return;
-              console.log('end');
-              pressureEnd(e);
-            });
-          });
-          pressureEnd(e);
-        });
-      });
       updateLabel(null, 0);
       updateMeta();
       addDrag();
@@ -1145,6 +1126,7 @@
         error => null
       );
     };
+      
   </script>
 
 </html>
