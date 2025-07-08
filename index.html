@@ -3,16 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="theme-color" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000">
   <link rel="shortcut icon" type="image/x-icon" href='data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20height%3D%2224px%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224px%22%20fill%3D%22%23e3e3e3%22%3E%3Cpath%20d%3D%22M189-160q-60%200-102.5-43T42-307q0-9%201-18t3-18l84-336q14-54%2057-87.5t98-33.5h390q55%200%2098%2033.5t57%2087.5l84%20336q2%209%203.5%2018.5T919-306q0%2061-43.5%20103.5T771-160q-42%200-78-22t-54-60l-28-58q-5-10-15-15t-21-5H385q-11%200-21%205t-15%2015l-28%2058q-18%2038-54%2060t-78%2022Zm3-80q19%200%2034.5-10t23.5-27l28-57q15-31%2044-48.5t63-17.5h190q34%200%2063%2018t45%2048l28%2057q8%2017%2023.5%2027t34.5%2010q28%200%2048-18.5t21-46.5q0%201-2-19l-84-335q-7-27-28-44t-49-17H285q-28%200-49.5%2017T208-659l-84%20335q-2%206-2%2018%200%2028%2020.5%2047t49.5%2019Zm348-280q17%200%2028.5-11.5T580-560q0-17-11.5-28.5T540-600q-17%200-28.5%2011.5T500-560q0%2017%2011.5%2028.5T540-520Zm80-80q17%200%2028.5-11.5T660-640q0-17-11.5-28.5T620-680q-17%200-28.5%2011.5T580-640q0%2017%2011.5%2028.5T620-600Zm0%20160q17%200%2028.5-11.5T660-480q0-17-11.5-28.5T620-520q-17%200-28.5%2011.5T580-480q0%2017%2011.5%2028.5T620-440Zm80-80q17%200%2028.5-11.5T740-560q0-17-11.5-28.5T700-600q-17%200-28.5%2011.5T660-560q0%2017%2011.5%2028.5T700-520Zm-360%2060q13%200%2021.5-8.5T370-490v-40h40q13%200%2021.5-8.5T440-560q0-13-8.5-21.5T410-590h-40v-40q0-13-8.5-21.5T340-660q-13%200-21.5%208.5T310-630v40h-40q-13%200-21.5%208.5T240-560q0%2013%208.5%2021.5T270-530h40v40q0%2013%208.5%2021.5T340-460Zm140-20Z%22/%3E%3C/svg%3E' />
   <title>Remote for Car</title>
-  <style >
+  <style>
     :root {
       --bgC: #9097E6;
       --mC: #ffffffef;
       --pC: #9097e65F;
       --sC: #bdc3f1;
+      --spC: var(--sC);
     }
     
     [data-theme="theme1"] {
@@ -142,7 +143,7 @@
         top: 60%;
         bottom: 40%;
         left: 100px;
-        margin: auto; 
+        margin: auto;
       }
       
       .left {
@@ -453,7 +454,8 @@
     
     .disconnect-label,
     .light-label,
-    .fullscreen-label {
+    .fullscreen-label,
+    .local-label {
       padding-right: 10px;
       display: flex;
       justify-content: space-between;
@@ -607,9 +609,8 @@
       position: absolute;
     }
     
-    input[type=range]::-webkit-slider-thumb {
+    input[type=range]::-webkit-slider-thumb{
       -webkit-appearance: none;
-      color: red;
       height: 40px;
       width: 40px;
       background: transparent;
@@ -619,6 +620,18 @@
       box-shadow: -2px -2px 2px #0000004f,
         inset .1px .1px 4px rgba(0, 0, 0, 0.1),
         inset -.1px -.1px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    input[type=range]::-moz-range-thumb {
+      height: 36px;
+      width: 36px;
+      background: transparent;
+      border: 2px solid var(--mC);
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: -2px -2px 2px #0000004f,
+        inset .1px .1px 3px rgba(0, 0, 0, 0.1),
+        inset -.1px -.1px 3px rgba(0, 0, 0, 0.1);
     }
     
     .slider-label {
@@ -632,6 +645,58 @@
       pointer-events: none;
       box-shadow: -2px 2px 4px #0000004f;
     }
+    
+    .local-label {
+      padding-top: 12px;
+    }
+    
+    .local {
+      position: relative;
+      background: var(--spC);
+      border-radius: .2rem;
+      padding: 1px 0 1px 0;
+      box-shadow: -.5px .5px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    #local {
+      all: unset;
+      text-shadow: none;
+      color: var(--bgC);
+      width: calc(100% - .4rem);
+      font-size: .9rem;
+      margin: .2rem;
+      border: none;
+      text-align: center;
+        text-shadow: -0.8px 1.3px 1px #0000009f;
+    }
+    
+    .local-label:has(#local:focus) {
+      --spC: var(--mC);
+      #local{
+        text-shadow: -0.8px 1.3px 1px #0000003f;
+      }
+    }
+    
+    #local:focus {
+      text-align: left;
+    }
+    
+    #local::placeholder {
+      color: var(--bgC);
+      opacity: .3;
+      text-align: left;
+    }
+    
+    .isCorrect {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 4px;
+      height: 4px;
+      background-color: #FF0000;
+      border-radius: 50%;
+      box-shadow: -.6px .6px 2px #0000002f;
+    }
   </style>
 </head>
 
@@ -639,12 +704,17 @@
   <div class="overlay" ontouchstart="closeMemu()  " data-overlay></div>
   <h1>
     <div class="toggle-icon" id="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-120v-80h720v80H120Zm0-320v-80h720v80H120Zm0-320v-80h720v80H120Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
+        <path d="M120-120v-80h720v80H120Zm0-320v-80h720v80H120Zm0-320v-80h720v80H120Z" />
+      </svg>
     </div>
     <div style="position: absolute; left:4rem">Remote Control</div>
   </h1>
+  
+  <!--------  Manu  -------->
   <div class="manu">
-    <div>
+    
+    <div><!------  Theme  ------>
       <input type="checkbox" id="toggle">
       <label for="toggle" class="menus-label label">Theme</label>
       <div class="menus">
@@ -656,16 +726,18 @@
           <li>Theme 5 <input type="radio" value="theme5" name="theme" /></li>
         </ul>
       </div>
-    </div>
-    <div>
+    </div><!------  /Theme ------>
+    
+    <div><!------  Fullscreen  ------>
       <label class="fullscreen-label label" onclick="Fullscreen()">
         Fullscreen
         <span class="fullScreenBox"><svg class="drag" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#erefe3">
             <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
           </svg></span>
       </label>
-    </div>
-    <div>
+    </div><!------  /Fullscreen ------>
+    
+    <div><!------  Light  ------>
       <label class="light-label label">
         Light
         <span class="switch">
@@ -673,8 +745,9 @@
           <span class="slider"></span>
         </span>
       </label>
-    </div>
-    <div>
+    </div><!------  /Light ------>
+    
+    <div><!------  Disconnect  ------>
       <label class="disconnect-label label">
         Disconnect
         <span class="switch">
@@ -682,18 +755,33 @@
           <span class="slider"></span>
         </span>
       </label>
-    </div>
+    </div><!------  /Disconnect ------>
+    
+    <div><!------  Local IP  ------>
+      <label class="local-label label" for="local">
+        <span class="local">
+          <input type="url" name="local" id="local" value="http://192.168.4.1" placeholder="Enter Local IP" oninput="localIP()" />
+          <span class="isCorrect"></span>
+        </span>
+      </label>
+    </div><!------  /Local IP ------>
+    
   </div>
+  <!--------  /Manu -------->
+  
+  <!--------  Remote Box  -------->
   <div class="box lefBox">
     <div class="speed" onclick="sl()">
-      <svg xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 1.5px 1px #00000080);" viewBox="0 -960 960 960" >
+      <svg xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0px 1.5px 1px #00000080);" viewBox="0 -960 960 960">
         <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
       </svg>
     </div>
+    
+    <!------  Gear Control  ------>
     <div class="gear-control">
-      <span class="slider-label">80%</span> 
+      <span class="slider-label">80%</span>
       <button class="gear-btn up" onclick="changeSpeed(5)">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
           <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z" />
         </svg></button>
       <div class="slider-wrapper">
@@ -703,19 +791,30 @@
           <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
         </svg></button>
     </div>
+    <!------  /Gear Control ------>
+    
+    <!------  Header  ------>
     <div class="dragBox" style="position: absolute; top : .5rem; right: .5rem; padding: 3px;" onclick="drag()">
       <svg xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(-1px 1.5px 1px #00000080);" height="24px" viewBox="0 -960 960 960" width="24px">
         <path d="M160-360v-80h640v80H160Zm0-160v-80h640v80H160Z" />
       </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#erefe3"><path d="M480-80 310-250l57-57 73 73v-206H235l73 72-58 58L80-480l169-169 57 57-72 72h206v-206l-73 73-57-57 170-170 170 170-57 57-73-73v206h205l-73-72 58-58 170 170-170 170-57-57 73-73H520v205l72-73 58 58L480-80Z"/></svg>
-      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#erefe3">
+        <path d="M480-80 310-250l57-57 73 73v-206H235l73 72-58 58L80-480l169-169 57 57-72 72h206v-206l-73 73-57-57 170-170 170 170-57 57-73-73v206h205l-73-72 58-58 170 170-170 170-57-57 73-73H520v205l72-73 58 58L480-80Z" />
+      </svg>
+    </div>
     <h3 style=" text-shadow: -1px 1px 3px #00000080; padding: 5px; margin-left: 50%; transform: translateX(-50%); width: 50%; text-align: center;">Control</h3>
-    <!----  Button  ---->
+    <!------  /Helader ------>
+    
+    <!------  Button  ------>
     <button class="button left" type="submit">LEFT</button>
     <button class="button right" type="submit">RIGHT</button>
     <button class="button forward" type="submit">FORWARD</button>
     <button class="button backward" type="submit">BACKWARD</button>
+    <!------  /Button ------>
+    
   </div>
+  <!--------  /Remote Box -------->
+  
   <script>
     const html = document.documentElement,
       box = document.querySelector('.box'),
@@ -748,8 +847,7 @@
       didEnd = false,
       activeButton = null,
       last = null,
-      longPressTimer, topL, originalClass, nowS;
-    const BASE_URL = (prompt = prompt('localIP?')) ? prompt : "http://192.168.4.1";
+      longPressTimer, topL, originalClass, nowS, BASE_URL = 'http://192.168.4.1';
     
     function dragEffectAdd()
     {
@@ -782,23 +880,38 @@
         rect = box.getBoundingClientRect();
       offsetY = touch.clientY - rect.top;
       offsetX = touch.clientX - rect.left;
-      longPressTimer = setTimeout(() => { dragEffectAdd(); }, 800);
+      a = false;
+      longPressTimer = setTimeout(() => { dragEffectAdd();
+        a = null; }, 800);
     }
+    let a;
     
     function onTouchMove(e)
     {
-      if (!isDragging) return;
-      e.preventDefault();
-      const touch = e.touches[0],
-        maxX = document.documentElement.clientWidth - box.offsetWidth,
-        maxY = document.documentElement.clientHeight - box.offsetHeight;
-      box.style.left = Math.max(0, Math.min(touch.clientX - offsetX, maxX)) + 'px';
-      box.style.top = Math.max(0, Math.min(touch.clientY - offsetY, maxY)) + 'px';
-      topL = Math.max(document.querySelector('h1').getBoundingClientRect().bottom + 1, Math.min(touch.clientY - offsetY, maxY)) + 'px';
+      const touch = e.touches[0];
+      
+      if (isDragging) {
+        e.preventDefault();
+        const maxX = document.documentElement.clientWidth - box.offsetWidth,
+          maxY = document.documentElement.clientHeight - box.offsetHeight;
+        box.style.left = Math.max(0, Math.min(touch.clientX - offsetX, maxX)) + 'px';
+        box.style.top = Math.max(0, Math.min(touch.clientY - offsetY, maxY)) + 'px';
+        topL = Math.max(document.querySelector('h1').getBoundingClientRect().bottom + 1, Math.min(touch.clientY - offsetY, maxY)) + 'px';
+      }
+      if (a === null) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const insideX = touch.clientX >= rect.left && touch.clientX <= rect.right;
+      const insideY = touch.clientY >= rect.top && touch.clientY <= rect.bottom;
+      
+      if (!insideX || !insideY && a === false) {
+        onTouchEnd(e);
+      }
     }
     
     function onTouchEnd(e)
     {
+      if (a === true) return;
+      a = true;
       const boxRect = box.getBoundingClientRect(),
         boxCenter = boxRect.left + boxRect.width / 2,
         screenCenter = window.innerWidth / 2;
@@ -902,6 +1015,7 @@
           '<svg xmlns="http://www.w3.org/2000/svg" height="24px" style="filter: drop-shadow(1px 1px 1.8px #00000080);" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>';
         icon.classList.add('rotated');
         manu.classList.add('manuShow');
+        localIP();
         if (!document.fullscreenElement) {
           overlay.classList.add('active');
         }
@@ -957,21 +1071,18 @@
       const xhr = new XMLHttpRequest();
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      
+      xhr.timeout = 720;
       xhr.onload = function() {
         if (xhr.status === 200) {
           if (onSuccess) onSuccess(xhr.responseText);
         } else if (xhr.status === 404) {
-          //alert("404 Not Found");
           if (onError) onError(xhr.status);
         } else {
-          //alert("Error code: " + xhr.status);
           if (onError) onError(xhr.status);
         }
       };
       
       xhr.onerror = function() {
-        //alert("Request failed");
         if (onError) onError(null);
       };
       
@@ -979,17 +1090,12 @@
     }
     
     function pressureStart(e) {
-      if (activeButton && activeButton !== e.currentTarget) return; // ব্লক অন্য বাটন
+      if (activeButton && activeButton !== e.currentTarget) return;
       activeButton = e.currentTarget;
       const found = activeButton.innerHTML.toLowerCase();
       if (!found) return;
       if (!BASE_URL) location.reload();
-      const url = BASE_URL + "/command";
-      const data = "action=" + encodeURIComponent(found);
-      sendXhrPost(url, data,
-        response => console.log("Success:", response),
-        error => null
-      );
+      sendXhrPost(`${BASE_URL}/command`, `action=${encodeURIComponent(found)}`);
       activeButton.style = 'transform: scale(0.97); text-shadow:none; box-shadow: none;';
       vibrator(50);
       didEnd = false;
@@ -1012,13 +1118,11 @@
       if (didEnd || activeButton !== e.currentTarget || outT) return;
       didEnd = true;
       outT = false;
-      const found = e.currentTarget.innerHTML.toLowerCase();
+      const found = e.currentTarget.innerHTML.trim().toLowerCase();
       if (!found) return;
-      const url = BASE_URL + "/command";
-      const data = "action=" + encodeURIComponent(found + "-stop");
-      sendXhrPost(url, data,
-        response => console.log("Success:", response),
-        error => null
+      sendXhrPost(
+        `${BASE_URL}/command`,
+        `action=${encodeURIComponent(found + "-stop")}`
       );
       e.currentTarget.removeAttribute('style');
       vibrator(50);
@@ -1048,12 +1152,7 @@
     function light() {
       const state = (event.target.checked) ? "on" : "off";
       setS("togglB", state);
-        const url = BASE_URL + "/light";
-        const data = "light=" + encodeURIComponent(state);
-      sendXhrPost(url, data,
-        response => console.log("Success:", response),
-        error => null
-      );
+      sendXhrPost(`${BASE_URL}/light`, `light=${encodeURIComponent(state)}`);
     }
     
     function updateLabel(a, v = 8) {
@@ -1062,13 +1161,23 @@
       label.textContent = val + '%';
       setS('rValue', val);
       if (!BASE_URL) location.reload();
-      const url = BASE_URL + "/speed";
-      const data = "speed=" + encodeURIComponent(val);
-      sendXhrPost(url, data,
-        response => console.log("Success:", response),
-        error => null
+      sendXhrPost(`${BASE_URL}/speed`, `speed=${encodeURIComponent(val)}`);
+    }
+    
+    function localIP() {
+      BASE_URL = document.querySelector('input[type=url]').value;
+      sendXhrPost(`${BASE_URL}/isConnect`,
+        null,
+        (res) => {
+          document.querySelector(".isCorrect").style = 'background:#00FF00;';
+          setS('BASE_URL', BASE_URL);
+          updateLabel(null, 0);
+          sendXhrPost(BASE_URL + "/light", `light=${encodeURIComponent(getS("togglB") ?? "off")}`);
+        },
+        (err) => {
+          document.querySelector(".isCorrect").style = 'background:#FF0000;';
+        }
       );
-      
     }
     
     icon.addEventListener('click', () => icon.classList.contains('rotated') ? closeMemu() : showMemu());
@@ -1102,31 +1211,33 @@
         addButton();
       } else {
         removeButton();
-      }if (!getB('site')){
+      }
+      if (!getB('site')) {
         setS('site', false);
-      }if (getS('class')){
+      }
+      if (getS('class')) {
         box.classList.remove('lefBox');
         box.classList.add(getS('class'));
-      }if (getS('theme')){
+      }
+      if (getS('theme')) {
         html.dataset.theme = getS('theme');
         last = document.querySelector(`[name="theme"][value="${getS('theme')}"]`);
         if (last) last.checked = true;
         updateMeta();
-      }if (getS('top') || getS('right') || getS('left')){
+      }
+      if (getS('top') || getS('right') || getS('left')) {
         box.style.cssText = `left:${getS('left')}; right:${getS('right')}; top:${getS('top')};`
+      }
+      if (getS('BASE_URL')) {
+        BASE_URL = getS('BASE_URL');
       }
       updateLabel(null, 0);
       updateMeta();
       addDrag();
       dragEffectRemove();
-      sendXhrPost(
-        BASE_URL + "/light",
-        `light=${encodeURIComponent(getS("togglB") ?? "off")}`,
-        response => console.log("Success:", response),
-        error => null
-      );
+      sendXhrPost(BASE_URL + "/light", `light=${encodeURIComponent(getS("togglB") ?? "off")}`);
     };
-      
   </script>
+</body>
 
 </html>
