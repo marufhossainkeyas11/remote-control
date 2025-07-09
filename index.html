@@ -1097,7 +1097,7 @@
       if (!BASE_URL) location.reload();
       sendXhrPost(`${BASE_URL}/command`, `action=${encodeURIComponent(found)}`);
       activeButton.style = 'transform: scale(0.97); text-shadow:none; box-shadow: none;';
-      vibrator(50);
+      vibrator(80);
       didEnd = false;
       outT = false;
     }
@@ -1125,7 +1125,7 @@
         `action=${encodeURIComponent(found + "-stop")}`
       );
       e.currentTarget.removeAttribute('style');
-      vibrator(50);
+      //vibrator(50);
       activeButton = null;
     }
     
