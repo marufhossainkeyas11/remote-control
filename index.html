@@ -1090,7 +1090,7 @@
     }
     
     function pressureStart(e) {
-      if (activeButton && activeButton !== e.currentTarget) return;
+      if (activeButton && activeButton !== e.currentTarget)   activeButton.removeAttribute('style');
       activeButton = e.currentTarget;
       const found = activeButton.innerHTML.toLowerCase();
       if (!found) return;
