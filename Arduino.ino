@@ -1,8 +1,12 @@
+#include <EEPROM.h> 
 #include <ESP8266WiFi.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <DNSServer.h>
 
+#define SSID_ADDR   0
+#define PASS_ADDR   100
+#define MAX_LEN     100
 #define IN1 D0
 #define IN2 D1
 #define IN3 D2
@@ -178,7 +182,7 @@ const char index_html_copy[] PROGMEM = R"rawliteral(
 <link rel="shortcut icon" type="imahge/x-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20height%3D%2224px%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224px%22%20fill%3D%22%23e3e3e3%22%3E%3Cpath%20d%3D%22M660-160h40v-160h-40v160Zm20-200q8%200%2014-6t6-14q0-8-6-14t-14-6q-8%200-14%206t-6%2014q0%208%206%2014t14%206ZM200-800v640-640%20200-200Zm80%20400h147q11-23%2025.5-43t32.5-37H280v80Zm0%20160h123q-3-20-3-40t3-40H280v80ZM200-80q-33%200-56.5-23.5T120-160v-640q0-33%2023.5-56.5T200-880h320l240%20240v92q-19-6-39-9t-41-3v-40H480v-200H200v640h227q11%2023%2025.5%2043T485-80H200Zm480-400q83%200%20141.5%2058.5T880-280q0%2083-58.5%20141.5T680-80q-83%200-141.5-58.5T480-280q0-83%2058.5-141.5T680-480Z%22/%3E%3C/svg%3E" />
 <title>Car Control User Manual</title><style>
 :root {--primary: #2c3e50;--accent: #9097E6;--bg: #EEECF1;--text: #34495e;}
-* {box-sizing: border-box;margin: 0;padding: 0;}
+* {box-sizing: border-box;margin: 0;padding: 0;-webkit-text-size-adjust: 100%;text-size-adjust: 100%;}
 body {font-family: Arial, sans-serif;background: var(--bg);color: var(--text);padding: 20px;box-shadow: inset 0 200px 200px -150px var(--accent);}
 header {text-align: center;margin-bottom: 2rem;}
 header h1 {font-size: 2.5rem;opacity: .8;color: var(--primary);text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.3);}
@@ -195,6 +199,7 @@ p {margin-top: 0.75rem;margin-bottom: 1rem;line-height: 1.6;}
 .info-box { background: #EBEEFF; padding: 10px; border-radius: 5px; font-size: 1.1rem; font-weight: bold; display: inline-block; color: var(--accent); word-break: break-all; overflow-wrap: break-word; box-shadow: inset 0 .8px 3px rgba(0, 0, 0, .2); }
 .copy-btn { display: flex; margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: 4px; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); align-items: center; justify-content: space-between; svg{margin-left: 3px;}}
 footer { text-align: center; margin-top: 2rem; color: #7f8c8d; font-size: 0.9rem; } 
+.delete {margin: 0 0 1rem 50%;transform: translateX(-50%);background: #FFEBEB;border-radius: 5px;font-size: 1.1rem;font-weight: bold;display: flex;color: #E69090;width: 100%;box-shadow: inset 0 .8px 3px rgba(0, 0, 0, .2);align-items: center;max-width: 100%;padding: 10px 1.5rem 10px 1.5rem;justify-content: space-between;span { text-overflow: hidden; overflow: auto; white-space: nowrap; width: min-content;  }  }
 @media (hover: hover) and (pointer: fine) { a:hover { color: var(--accent); text-decoration: none; } .copy-btn:hover { opacity: 0.8; color: var(--text); box-shadow: none; svg { fill: var(--text); } } } 
 @media (hover: none) and (pointer: coarse) { a:active { color: var(--accent); text-decoration: none; } .copy-btn:active { opacity: 0.8; color: var(--text); box-shadow: none;  svg { fill: var(--text); } } } 
 .sp { font-family: "Courier New", monospace; border-bottom: 1px solid #7F8C8D3f; font-style: bolder; } 
@@ -215,7 +220,15 @@ setTimeout(() => {
 el.classList.remove('highlight');
 void el.offsetWidth;
 el.classList.add('highlight');
-}, 800);};
+}, 800);};const sent = () => {
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "/clear", true);
+xhr.onload = function () {
+if (xhr.status === 200) {
+alert("✔ " + xhr.responseText);} else {
+alert("❌ Failed to clear WiFi");
+}};xhr.onerror = function () {
+alert("❌ Error sending request");};xhr.send();}
 </script></head>
 <body><header>
 <h1>Car Control User Manual</h1>
@@ -245,7 +258,9 @@ el.classList.add('highlight');
 <div class="info-box" id="Dlink"></div><br>
 <button id="copyLinkBtn" class="copy-btn">Remote Access Download Link </button>
 <p>If you paste the link and open it in your browser, You will be taken to the download page for the remote control panel. From there, you will download the file as a zip.</p>
-</section><section id="troubleshoot">
+</section><div class="delete" onclick="sent()"> SSID_NAME <span> </span> 
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+</svg></div><section id="troubleshoot">
 <h2>Troubleshooting</h2><ul>
 <li><span style="color: var(--accent);">Wi-Fi connection problem:</span> Reboot the router and try again.</li>
 <li><span style="color: var(--accent);">IP not copying:</span> Check the browser's Clipboard permissions.</li>
@@ -300,6 +315,21 @@ setTimeout(() => {window.location.href = 'http://192.168.4.1/find';}, 3000);
 </script></head><body><div></div></body></html>
 )rawliteral";
 
+void saveWiFi(const char* ssid, const char* pass) {
+  for (int i = 0; i < MAX_LEN; i++) {
+    EEPROM.write(SSID_ADDR + i, i < strlen(ssid) ? ssid[i] : 0);
+    EEPROM.write(PASS_ADDR + i, i < strlen(pass) ? pass[i] : 0);
+  }
+  EEPROM.commit();
+}
+void loadWiFi(char* ssid, char* pass) {
+  for (int i = 0; i < MAX_LEN; i++) {
+    ssid[i] = EEPROM.read(SSID_ADDR + i);
+    pass[i] = EEPROM.read(PASS_ADDR + i);
+  }
+  ssid[MAX_LEN - 1] = '\0';
+  pass[MAX_LEN - 1] = '\0';
+}
 void runMotorPercent(char motor , bool forward) {
   int in1, in2;
 
@@ -313,7 +343,6 @@ void runMotorPercent(char motor , bool forward) {
   digitalWrite(in1, forward ? HIGH : LOW);
   digitalWrite(in2, forward ? LOW : HIGH);
 }
-
 void setSpeed(int speedPercent) { 
   speedPercent = constrain(speedPercent, 0, 100);
   int pwmValue = map(speedPercent, 0, 100, 0, 1023);
@@ -436,6 +465,7 @@ void startWiFiServer() {
     if (request->hasParam("pass", true)) {
       password = request->getParam("pass", true)->value();
     }
+    saveWiFi(ssid.c_str(), password.c_str());
     WiFi.begin(ssid.c_str(), password.c_str());
     int attempts = 0;
     while (WiFi.status() != WL_CONNECTED && attempts < 50) {
@@ -468,6 +498,13 @@ void startWiFiServer() {
       else if (action == "backward") backward();
       else   Serial.println(">> Unknown command");
     }
+  });
+  server.on("/clear", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(200, "text/plain", "WiFi Cleared. Restarting...");
+  saveWiFi("", "");
+  WiFi.disconnect(true);
+  delay(1000);
+  ESP.restart();
   });
   server.on("/light",  HTTP_POST, [](AsyncWebServerRequest *request){
     if (request->hasParam("light", true)) {
@@ -507,6 +544,7 @@ void setup() {
   IPAddress apIP(192,168,4,1);
   digitalWrite(LED_PIN, HIGH);
   Serial.begin(115200);
+  EEPROM.begin(512);
   WiFi.disconnect(true);
   WiFi.mode(WIFI_AP_STA);
   WiFi.setOutputPower(20.5);
@@ -514,8 +552,12 @@ void setup() {
   dnsServer.start(53, "*", apIP);
   startWiFiServer();
   delay(200);
+  if (EEPROM.read(SSID_ADDR) == 0xFF) saveWiFi(ssid.c_str(), password.c_str());
+
+  char loadedSSID[MAX_LEN], loadedPass[MAX_LEN];
+  loadWiFi(loadedSSID, loadedPass);
   
-  WiFi.begin(ssid.c_str(), password.c_str());
+  WiFi.begin(loadedSSID, loadedPass);
   while (WiFi.status() != WL_CONNECTED) {
     dnsServer.processNextRequest();
     if (callF == true) scanWiFiNetworks();
@@ -558,3 +600,4 @@ void loop() {
     if (WiFi.status() != WL_CONNECTED) ESP.restart();
   }
 }
+
