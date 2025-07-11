@@ -975,6 +975,17 @@
     }
     
     function Fullscreen() {
+      if (
+          !(
+          document.fullscreenEnabled ||
+          document.webkitFullscreenEnabled ||
+          document.mozFullScreenEnabled ||
+          document.msFullscreenEnabled
+         )
+      ) {
+         alert('Does not support fullscreen.')
+         return;
+      }
       if (!document.fullscreenElement) {
         originalClass = [...box.classList].filter(e => !['box', 'normalScreen', 'dragging']?.includes(e));
         nowS = getB('site');
@@ -1125,7 +1136,7 @@
         `action=${encodeURIComponent(found + "-stop")}`
       );
       e.currentTarget.removeAttribute('style');
-      //vibrator(50);
+      vibrator(50);
       activeButton = null;
     }
     
