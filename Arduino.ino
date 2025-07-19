@@ -16,7 +16,7 @@
 #define ENA D5
 
 String ssid     = "Ezma";
-String password = "Ezma123456";
+String password = "Ezma12345";
 
 DNSServer       dnsServer;
 
@@ -179,8 +179,7 @@ const char index_html_copy[] PROGMEM = R"rawliteral(
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="imahge/x-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20height%3D%2224px%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224px%22%20fill%3D%22%23e3e3e3%22%3E%3Cpath%20d%3D%22M660-160h40v-160h-40v160Zm20-200q8%200%2014-6t6-14q0-8-6-14t-14-6q-8%200-14%206t-6%2014q0%208%206%2014t14%206ZM200-800v640-640%20200-200Zm80%20400h147q11-23%2025.5-43t32.5-37H280v80Zm0%20160h123q-3-20-3-40t3-40H280v80ZM200-80q-33%200-56.5-23.5T120-160v-640q0-33%2023.5-56.5T200-880h320l240%20240v92q-19-6-39-9t-41-3v-40H480v-200H200v640h227q11%2023%2025.5%2043T485-80H200Zm480-400q83%200%20141.5%2058.5T880-280q0%2083-58.5%20141.5T680-80q-83%200-141.5-58.5T480-280q0-83%2058.5-141.5T680-480Z%22/%3E%3C/svg%3E" />
-<title>Car Control User Manual</title><style>
+<link rel="icon" href="data:;base64,iVBORw0KGgo="><title>Car Control User Manual</title><style>
 :root {--primary: #2c3e50;--accent: #9097E6;--bg: #EEECF1;--text: #34495e;}
 * {box-sizing: border-box;margin: 0;padding: 0;-webkit-text-size-adjust: 100%;text-size-adjust: 100%;}
 body {font-family: Arial, sans-serif;background: var(--bg);color: var(--text);padding: 20px;box-shadow: inset 0 200px 200px -150px var(--accent);}
@@ -243,7 +242,7 @@ alert("❌ Error sending request");};xhr.send();}
 </ul></nav><section id="step1">
 <h2>Step 1: Connect to Wi-Fi</h2>
 <p><strong>Connect to the following Wi-Fi network for remote access:</strong></p>
-<div class="info-box">SSID_NAME</div>
+<div class="info-box ssi"></div>
 <p>If you are not connected to this network, the next step will not work.</p>
 </section><section id="step2">
 <h2>Step 2: Copy Local IP Address</h2>
@@ -260,7 +259,7 @@ alert("❌ Error sending request");};xhr.send();}
 <p>If you paste the link and open it in your browser, You will be taken to the download page for the remote control panel. From there, you will download the file as a zip.</p>
 </section><div class="delete" onclick="sent()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090">
 <path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z" />
-</svg> <span> SSID_NAME </span> 
+</svg> <span class="ssi"> </span> 
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
 </svg></div><section id="troubleshoot">
 <h2>Troubleshooting</h2><ul>
@@ -273,9 +272,10 @@ alert("❌ Error sending request");};xhr.send();}
 <p><strong style="color: var(--accent);">Phone:</strong> <a href="tel:+8801872605055">+8801872605055</a></p>
 <p><strong style="color: var(--accent);">Email:</strong> <a href="mailto:marufhossainkeyas@gmail.com">marufhossainkeyas@gmail.com</a></p>
 </section><footer>&copy; 2025 <span style="color: var(--accent);">Car Control System</span>. All rights reserved.</footer><script>
-let ip = 'http://LOCAL_IP', remoteLink = 'https://github.com/marufhossainkeyas11/remote-control.git';
+let ip = 'http://LOCAL_IP', ssi = 'SSID_NAME', remoteLink = 'https://github.com/marufhossainkeyas11/remote-control.git';
 document.getElementById('ipAddress').innerHTML = ip;
 document.getElementById('Dlink').innerHTML = remoteLink;
+document.querySelectorAll('.ssi').forEach(item => item.innerHTML = ssi )
 document.querySelectorAll('.a').forEach(item=> item.innerHTML += `<span class="dot"></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m480-360 160-160H320l160 160Zm0 280q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" /></svg>`)
 document.querySelectorAll('.copy-btn').forEach(item=> item.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" height=".7rem" viewBox="0 -960 960 960" width=".7rem" fill="#fff"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z" /></svg>`)
 document.getElementById('copyIPBtn').addEventListener('click', () => {
@@ -483,12 +483,14 @@ void startWiFiServer() {
       request->send(200, "text/plain", "WiFi Lost");
     }
   });
-  server.on("/copy",  HTTP_GET, [ipStr](AsyncWebServerRequest *request){
+  
+  server.on("/copy",  HTTP_GET, [](AsyncWebServerRequest *request){
       String html = String(FPSTR(index_html_copy));
       html.replace("LOCAL_IP", ipStr);
       html.replace("SSID_NAME", ssid);
       request->send(200, "text/html", html);
   });
+  
   server.on("/command",  HTTP_POST, [](AsyncWebServerRequest *request){
     if (state == "on") BlinkOnce = true;
     if (request->hasParam("action", true)) {
@@ -503,10 +505,10 @@ void startWiFiServer() {
   });
   server.on("/clear", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/plain", "WiFi Cleared. Restarting...");
-  saveWiFi("", "");
-  WiFi.disconnect(true);
-  delay(1000);
-  ESP.restart();
+    saveWiFi("","");
+    WiFi.disconnect(true);
+    delay(1000);
+    ESP.restart();
   });
   server.on("/light",  HTTP_POST, [](AsyncWebServerRequest *request){
     if (request->hasParam("light", true)) {
@@ -558,7 +560,8 @@ void setup() {
 
   char loadedSSID[MAX_LEN], loadedPass[MAX_LEN];
   loadWiFi(loadedSSID, loadedPass);
-  
+  ssid = loadedSSID;
+  password = loadedPass;
   WiFi.begin(loadedSSID, loadedPass);
   while (WiFi.status() != WL_CONNECTED) {
     dnsServer.processNextRequest();
@@ -602,4 +605,3 @@ void loop() {
     if (WiFi.status() != WL_CONNECTED) ESP.restart();
   }
 }
-
