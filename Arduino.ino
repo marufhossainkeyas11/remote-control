@@ -187,8 +187,8 @@ body {font-family: Arial, sans-serif;background: var(--bg);color: var(--text);pa
 header {text-align: center;margin-bottom: 2rem;}
 header h1 {font-size: 2.5rem;opacity: .8;color: var(--primary);text-shadow: 3px 5px 7px rgba(0, 0, 0, 0.3);}
 header p {margin-top: 0.5rem;font-size: 1rem;font-style: bolder;font-family: "Lucida Console", monospace;color: var(--accent);}
-nav { padding: 15px 20px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); margin-bottom: 1rem; border-radius: 2rem; text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23e3e3e390'><path d='M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z'/></svg>") no-repeat center center / contain; text-align: center;
-strong { font-size: 1.2rem; } }
+nav {position: relative;z-index: 0;padding: 15px 20px;box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);margin-bottom: 1rem;border-radius: 2rem;text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);background: transparent;text-align: center;strong {font-size: 1.4rem;color: var(--accent);}}
+nav::before {content: "";position: absolute;border-radius: 2rem;inset: 0;z-index: -1;background: #9097E622 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%239097E640'><path d='M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z'/></svg>") no-repeat center center / contain;filter: blur(1px);}
 nav ul {list-style: none;padding: 0;margin-top: 10px; line-height: 30px; li:last-child {border: none;}}
 nav ul li {border-bottom: 1px solid #00000020;}
 section {padding: 1.5rem;margin-bottom: 1rem;border-radius: 1rem;box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);}
@@ -199,7 +199,7 @@ p {margin-top: 0.75rem;margin-bottom: 1rem;line-height: 1.6;}
 .info-box { background: #EBEEFF; padding: 10px; border-radius: 5px; font-size: 1.1rem; font-weight: bold; display: inline-block; color: var(--accent); word-break: break-all; overflow-wrap: break-word; box-shadow: inset 0 .8px 3px rgba(0, 0, 0, .2); }
 .copy-btn { display: flex; margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: 4px; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); align-items: center; justify-content: space-between; svg{margin-left: 3px;}}
 footer { text-align: center; margin-top: 2rem; color: #7f8c8d; font-size: 0.9rem; } 
-.delete {margin: 0 0 1rem 50%;transform: translateX(-50%);background: #FFEBEB;border-radius: 5px;font-size: 1.1rem;font-weight: bold;display: flex;color: #E69090;width: 100%;box-shadow: inset 0 .8px 3px rgba(0, 0, 0, .2);align-items: center;max-width: 100%;padding: 10px 1.5rem 10px 1.5rem;justify-content: space-between;span { text-overflow: hidden; overflow: auto; white-space: nowrap; width: min-content;  }  }
+.delete {margin: 0 0 1rem 50%;transform: translateX(-50%);background: #FFEBEB;border-radius: 5px;font-size: 1.1rem;font-weight: bold;display: flex;color: #E69090;width: 100%;box-shadow: 0 .8px 3px rgba(0, 0, 0, .2);align-items: center;max-width: 100%;padding: 10px 1.5rem 10px 1.5rem;justify-content: space-between;cursor: pointer; span {  text-overflow: hidden;  overflow: auto;  white-space: nowrap;  width: min-content;  margin: 0 auto 0 10px;  opacity: .8;}*:first-child {  transform: translateY(-2px);}* {  filter: drop-shadow(0 1.5px 1px rgba(0, 0, 0, 0.2));}}  
 @media (hover: hover) and (pointer: fine) { a:hover { color: var(--accent); text-decoration: none; } .copy-btn:hover { opacity: 0.8; color: var(--text); box-shadow: none; svg { fill: var(--text); } } } 
 @media (hover: none) and (pointer: coarse) { a:active { color: var(--accent); text-decoration: none; } .copy-btn:active { opacity: 0.8; color: var(--text); box-shadow: none;  svg { fill: var(--text); } } } 
 .sp { font-family: "Courier New", monospace; border-bottom: 1px solid #7F8C8D3f; font-style: bolder; } 
@@ -258,7 +258,9 @@ alert("❌ Error sending request");};xhr.send();}
 <div class="info-box" id="Dlink"></div><br>
 <button id="copyLinkBtn" class="copy-btn">Remote Access Download Link </button>
 <p>If you paste the link and open it in your browser, You will be taken to the download page for the remote control panel. From there, you will download the file as a zip.</p>
-</section><div class="delete" onclick="sent()"> SSID_NAME <span> </span> 
+</section><div class="delete" onclick="sent()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090">
+<path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z" />
+</svg> <span> SSID_NAME </span> 
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
 </svg></div><section id="troubleshoot">
 <h2>Troubleshooting</h2><ul>
@@ -268,8 +270,8 @@ alert("❌ Error sending request");};xhr.send();}
 </ul></section><section id="support">
 <h2>Contact & Support</h2>
 <p><strong>Contact us if you have any problems or questions:</strong></p>
-<p><strong style="color: var(--accent);">Email:</strong> <a href="mailto:marufhossainkeyas@gmail.com">marufhossainkeyas@gmail.com</a></p>
 <p><strong style="color: var(--accent);">Phone:</strong> <a href="tel:+8801872605055">+8801872605055</a></p>
+<p><strong style="color: var(--accent);">Email:</strong> <a href="mailto:marufhossainkeyas@gmail.com">marufhossainkeyas@gmail.com</a></p>
 </section><footer>&copy; 2025 <span style="color: var(--accent);">Car Control System</span>. All rights reserved.</footer><script>
 let ip = 'http://LOCAL_IP', remoteLink = 'https://github.com/marufhossainkeyas11/remote-control.git';
 document.getElementById('ipAddress').innerHTML = ip;
