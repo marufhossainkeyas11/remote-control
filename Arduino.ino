@@ -15,8 +15,8 @@
 #define ENB D6
 #define ENA D5
 
-String ssid     = "Ezma";
-String password = "Ezma12345";
+String ssid     = "abcd";
+String password = "abcd12345";
 
 DNSServer       dnsServer;
 
@@ -202,11 +202,9 @@ footer { text-align: center; margin-top: 2rem; color: #7f8c8d; font-size: 0.9rem
 @media (hover: hover) and (pointer: fine) { a:hover { color: var(--accent); text-decoration: none; } .copy-btn:hover { opacity: 0.8; color: var(--text); box-shadow: none; svg { fill: var(--text); } } } 
 @media (hover: none) and (pointer: coarse) { a:active { color: var(--accent); text-decoration: none; } .copy-btn:active { opacity: 0.8; color: var(--text); box-shadow: none;  svg { fill: var(--text); } } } 
 .sp { font-family: "Courier New", monospace; border-bottom: 1px solid #7F8C8D3f; font-style: bolder; } 
-#troubleshoot ul { padding: 0.75rem 0 0 20px;  li { padding: 4px; } }
 #step1 {background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23EBEEFF90'><path d='M720-120v-120H600v-80h120v-120h80v120h120v80H800v120h-80Zm-240 0L0-600q95-97 219.5-148.5T480-800q136 0 260.5 51.5T960-600L822-463q-14-14-28-28.5T766-520l78-78q-79-60-172-91t-192-31q-99 0-192 31t-172 91l364 364 40-40 28.5 28.5L577-217l-97 97Zm0-357Z'/></svg>") no-repeat center center / 15rem 15rem;}
 #step2 {background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23EBEEFF90'><path d='M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h167q11-35 43-57.5t70-22.5q40 0 71.5 22.5T594-840h166q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560h-80v120H280v-120h-80v560Zm280-560q17 0 28.5-11.5T520-800q0-17-11.5-28.5T480-840q-17 0-28.5 11.5T440-800q0 17 11.5 28.5T480-760Z'/></svg>") no-repeat center center / 15rem 15rem;}
 #step3 {background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23EBEEFF90'><path d='M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z'/></svg>") no-repeat center center / contain;}
-#troubleshoot {background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23e3e3e390'><path d='m234-480-12-60q-12-5-22.5-10.5T178-564l-58 18-40-68 46-40q-2-13-2-26t2-26l-46-40 40-68 58 18q11-8 21.5-13.5T222-820l12-60h80l12 60q12 5 22.5 10.5T370-796l58-18 40 68-46 40q2 13 2 26t-2 26l46 40-40 68-58-18q-11 8-21.5 13.5T326-540l-12 60h-80Zm40-120q33 0 56.5-23.5T354-680q0-33-23.5-56.5T274-760q-33 0-56.5 23.5T194-680q0 33 23.5 56.5T274-600ZM592-40l-18-84q-17-6-31.5-14.5T514-158l-80 26-56-96 64-56q-2-18-2-36t2-36l-64-56 56-96 80 26q14-11 28.5-19.5T574-516l18-84h112l18 84q17 6 31.5 14.5T782-482l80-26 56 96-64 56q2 18 2 36t-2 36l64 56-56 96-80-26q-14 11-28.5 19.5T722-124l-18 84H592Zm56-160q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z'/></svg>") no-repeat center center / contain;}
 #support {background: rgba(255, 255, 255, 1) url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' fill='%23e3e3e390'><path d='m480-80-10-120h-10q-142 0-241-99t-99-241q0-142 99-241t241-99q71 0 132.5 26.5t108 73q46.5 46.5 73 108T800-540q0 75-24.5 144t-67 128q-42.5 59-101 107T480-80Zm80-146q71-60 115.5-140.5T720-540q0-109-75.5-184.5T460-800q-109 0-184.5 75.5T200-540q0 109 75.5 184.5T460-280h100v54Zm-101-95q17 0 29-12t12-29q0-17-12-29t-29-12q-17 0-29 12t-12 29q0 17 12 29t29 12Zm-29-127h60q0-30 6-42t38-44q18-18 30-39t12-45q0-51-34.5-76.5T460-720q-44 0-74 24.5T344-636l56 22q5-17 19-33.5t41-16.5q27 0 40.5 15t13.5 33q0 17-10 30.5T480-558q-35 30-42.5 47.5T430-448Zm30-65Z'/></svg>") no-repeat center center / contain;}
 a{align-items: center;color: var(--accent);font-weight: 500;transition: color 0.3s ease, text-decoration 0.3s ease;}
 li a {display: flex;align-items: center;text-decoration: none;font-weight: 500;transition: color 0.3s ease, text-decoration 0.3s ease;.dot {flex: 1;border-bottom: 3px dotted #9097E6;margin: 0 8px;height: 1px;opacity: .6;}svg {flex-shrink: 0;margin-right: 5px;height: 16px;width: 16px;fill: #9097E6;filter: drop-shadow(0 1.5px 1px rgba(0, 0, 0, 0.4));}}
@@ -261,12 +259,7 @@ alert("❌ Error sending request");};xhr.send();}
 <path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z" />
 </svg> <span class="ssi"> </span> 
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#E69090"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-</svg></div><section id="troubleshoot">
-<h2>Troubleshooting</h2><ul>
-<li><span style="color: var(--accent);">Wi-Fi connection problem:</span> Reboot the router and try again.</li>
-<li><span style="color: var(--accent);">IP not copying:</span> Check the browser's Clipboard permissions.</li>
-<li><span style="color: var(--accent);">Link not working:</span> Make sure the IP is pasted correctly and the devices are on the same network.</li>
-</ul></section><section id="support">
+</svg></div><section id="support">
 <h2>Contact & Support</h2>
 <p><strong>Contact us if you have any problems or questions:</strong></p>
 <p><strong style="color: var(--accent);">Phone:</strong> <a href="tel:+8801872605055">+8801872605055</a></p>
@@ -448,6 +441,7 @@ void startWiFiServer() {
     AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "all ok");
     response->addHeader("Access-Control-Allow-Origin", "*");
     request->send(response);
+    callF = false;
   });
   server.on("/find", HTTP_GET, [](AsyncWebServerRequest *request){
     callF = false;
