@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000">
   <link rel="shortcut icon" type="image/x-icon" href='data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20height%3D%2224px%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224px%22%20fill%3D%22%23e3e3e3%22%3E%3Cpath%20d%3D%22M189-160q-60%200-102.5-43T42-307q0-9%201-18t3-18l84-336q14-54%2057-87.5t98-33.5h390q55%200%2098%2033.5t57%2087.5l84%20336q2%209%203.5%2018.5T919-306q0%2061-43.5%20103.5T771-160q-42%200-78-22t-54-60l-28-58q-5-10-15-15t-21-5H385q-11%200-21%205t-15%2015l-28%2058q-18%2038-54%2060t-78%2022Zm3-80q19%200%2034.5-10t23.5-27l28-57q15-31%2044-48.5t63-17.5h190q34%200%2063%2018t45%2048l28%2057q8%2017%2023.5%2027t34.5%2010q28%200%2048-18.5t21-46.5q0%201-2-19l-84-335q-7-27-28-44t-49-17H285q-28%200-49.5%2017T208-659l-84%20335q-2%206-2%2018%200%2028%2020.5%2047t49.5%2019Zm348-280q17%200%2028.5-11.5T580-560q0-17-11.5-28.5T540-600q-17%200-28.5%2011.5T500-560q0%2017%2011.5%2028.5T540-520Zm80-80q17%200%2028.5-11.5T660-640q0-17-11.5-28.5T620-680q-17%200-28.5%2011.5T580-640q0%2017%2011.5%2028.5T620-600Zm0%20160q17%200%2028.5-11.5T660-480q0-17-11.5-28.5T620-520q-17%200-28.5%2011.5T580-480q0%2017%2011.5%2028.5T620-440Zm80-80q17%200%2028.5-11.5T740-560q0-17-11.5-28.5T700-600q-17%200-28.5%2011.5T660-560q0%2017%2011.5%2028.5T700-520Zm-360%2060q13%200%2021.5-8.5T370-490v-40h40q13%200%2021.5-8.5T440-560q0-13-8.5-21.5T410-590h-40v-40q0-13-8.5-21.5T340-660q-13%200-21.5%208.5T310-630v40h-40q-13%200-21.5%208.5T240-560q0%2013%208.5%2021.5T270-530h40v40q0%2013%208.5%2021.5T340-460Zm140-20Z%22/%3E%3C/svg%3E' />
   <title>Remote for Car</title>
@@ -1168,9 +1168,10 @@
     
     function updateLabel(a, v = 8) {
       vibrator(v)
-      const val = +slider.value;
+      const val = (!a) ? slider.value : getS('rValue');
       label.textContent = val + '%';
       setS('rValue', val);
+      slider.value = val;
       if (!BASE_URL) location.reload();
       sendXhrPost(`${BASE_URL}/speed`, `speed=${encodeURIComponent(val)}`);
     }
@@ -1192,7 +1193,7 @@
     }
     
     icon.addEventListener('click', () => icon.classList.contains('rotated') ? closeMemu() : showMemu());
-    slider.addEventListener('input', updateLabel);
+    slider.addEventListener('input', ()=> updateLabel(null));
     
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement && originalClass[0] !== undefined && nowS !== null) {
@@ -1240,9 +1241,9 @@
         box.style.cssText = `left:${getS('left')}; right:${getS('right')}; top:${getS('top')};`
       }
       if (getS('BASE_URL')) {
-        BASE_URL = getS('BASE_URL');
+        BASE_URL = document.querySelector('input[type=url]').value = getS('BASE_URL');
       }
-      updateLabel(null, 0);
+      updateLabel(getS('rValue'), 0);
       updateMeta();
       addDrag();
       dragEffectRemove();
